@@ -16,11 +16,16 @@ export default {
     // As printed on the official poster.
     venue: 'Mecure by Pullmans',
   },
+  // Connected, ID Badge and Vital Signs come in two colour schemes (see
+  // palettes in theme.js); `props` is passed to the design.
   designs: [
     { name: 'Gala Night', label: 'Candlelit Dinner', Component: GalaNight },
     { name: 'Menu Card', label: 'Dinner Menu', Component: MenuCard },
-    { name: 'Connected', label: 'Event Poster', Component: Connected },
-    { name: 'ID Badge', label: 'Beyond the Badge', Component: IdBadge },
-    { name: 'Vital Signs', label: 'Light & Clinical', Component: VitalSigns },
+    { name: 'Connected', label: 'Evening Gold', Component: Connected, props: { palette: 'gold' } },
+    { name: 'ID Badge', label: 'Evening Gold', Component: IdBadge, props: { palette: 'gold' } },
+    { name: 'Vital Signs', label: 'Evening Gold', Component: VitalSigns, props: { palette: 'gold' } },
+    { name: 'Connected', label: 'Original Blue', Component: Connected, props: { palette: 'blue' } },
+    { name: 'ID Badge', label: 'Original Blue', Component: IdBadge, props: { palette: 'blue' } },
+    { name: 'Vital Signs', label: 'Original Blue', Component: VitalSigns, props: { palette: 'blue' } },
   ],
 };

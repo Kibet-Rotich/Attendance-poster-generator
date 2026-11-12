@@ -8,7 +8,7 @@ export const Photo = (props) => <BasePhoto placeholderColor={colors.cyan} placeh
 
 // Glowing icon circle, as in the arc of medical icons on the poster.
 // `icon` is a lucide component; `size` and `x`/`y` (centre) are in cqw.
-export const IconOrb = ({ icon, x, y, size = 13 }) => (
+export const IconOrb = ({ icon, x, y, size = 13, palette }) => (
   <div
     className="absolute flex items-center justify-center"
     style={{
@@ -17,11 +17,11 @@ export const IconOrb = ({ icon, x, y, size = 13 }) => (
       width: `${size}cqw`,
       height: `${size}cqw`,
       borderRadius: '50%',
-      background: 'radial-gradient(circle at 50% 40%, #1d4fb8 0%, #0a1d4f 75%)',
-      border: '0.4cqw solid rgba(220,245,255,0.9)',
-      boxShadow: `0 0 2.5cqw ${colors.cyan}, 0 1.2cqw 2.5cqw rgba(255,181,71,0.55), inset 0 0 1.5cqw rgba(95,212,255,0.5)`,
+      background: palette.orbFill,
+      border: `0.4cqw solid ${palette.orbBorder}`,
+      boxShadow: palette.orbShadow,
     }}
   >
-    {createElement(icon, { color: '#fff', strokeWidth: 1.8, style: { width: `${size * 0.48}cqw`, height: `${size * 0.48}cqw` } })}
+    {createElement(icon, { color: palette.orbIcon, strokeWidth: 1.8, style: { width: `${size * 0.48}cqw`, height: `${size * 0.48}cqw` } })}
   </div>
 );

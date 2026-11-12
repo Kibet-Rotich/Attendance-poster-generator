@@ -178,7 +178,7 @@ export default function AttendingPosterGenerator() {
       });
 
       const link = document.createElement('a');
-      link.download = `attending-poster-${hub.id}-${attendeeData.name.replace(/\s+/g, '-').toLowerCase()}-${selected.name.replace(/\s+/g, '-').toLowerCase()}.png`;
+      link.download = `attending-poster-${hub.id}-${attendeeData.name.replace(/\s+/g, '-').toLowerCase()}-${`${selected.name} ${selected.props?.palette ?? ''}`.trim().replace(/\s+/g, '-').toLowerCase()}.png`;
       link.href = dataUrl;
       document.body.appendChild(link);
       link.click();
@@ -261,7 +261,7 @@ export default function AttendingPosterGenerator() {
                 <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
                   {hub.designs.map(({ name, label }, id) => (
                     <button
-                      key={name}
+                      key={`${name}-${label}`}
                       onClick={() => setSelectedDesign(id)}
                       className={`p-2.5 sm:p-4 rounded-lg font-bold text-xs sm:text-base transition transform hover:scale-105 ${
                         selectedDesign === id
@@ -304,7 +304,7 @@ export default function AttendingPosterGenerator() {
                 overflow: 'hidden'
               }}
             >
-              <SelectedPoster attendeeData={attendeeData} eventData={eventData} />
+              <SelectedPoster attendeeData={attendeeData} eventData={eventData} {...selected.props} />
             </div>
 
             <div className="mt-4 sm:mt-6 bg-orange-500/10 border border-orange-500/30 rounded-lg sm:rounded-xl p-3 sm:p-4">

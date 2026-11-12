@@ -46,3 +46,71 @@ export const navyBackground = {
   ].join(', '),
   backgroundSize: '2.6cqw 2.6cqw, 100% 100%',
 };
+
+// Midnight navy with candlelight, for the dinner-style designs.
+export const candlelightBackground = {
+  backgroundColor: colors.midnight,
+  backgroundImage: `url(${candlelight})`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+};
+
+// Colour schemes for Connected, ID Badge and Vital Signs. Each design is listed
+// once per scheme so the two can be compared side by side.
+export const palettes = {
+  // The original look: electric blue, cyan glow, orange highlights.
+  blue: {
+    background: navyBackground,
+    accent: colors.cyan, // small labels, icons, thin rings
+    strong: colors.blue, // lanyard, photo borders
+    highlight: colors.glow, // arc, detail values
+    orbFill: 'radial-gradient(circle at 50% 40%, #1d4fb8 0%, #0a1d4f 75%)',
+    orbBorder: 'rgba(220,245,255,0.9)',
+    orbShadow: `0 0 2.5cqw ${colors.cyan}, 0 1.2cqw 2.5cqw rgba(255,181,71,0.55), inset 0 0 1.5cqw rgba(95,212,255,0.5)`,
+    orbIcon: '#fff',
+    ring: `linear-gradient(135deg, #e6f8ff, ${colors.cyan} 50%, ${colors.blue})`,
+    ringGlow: 'rgba(95,212,255,0.6)',
+    themeText: colors.red,
+    bodyText: '#c9d8f5',
+    lanyard: colors.blue,
+    stitch: colors.cyan,
+    cardBg: '#ffffff',
+    cardHeader: `linear-gradient(90deg, ${colors.blue}, ${colors.navy})`,
+    cardHeaderText: '#ffffff',
+    // Light design (Vital Signs)
+    paper: colors.paper,
+    grid: 'rgba(30,79,216,0.07)',
+    ink: colors.navy,
+    inkAccent: colors.blue,
+    trace: colors.blue,
+    traceGlow: colors.cyan,
+    footer: colors.navy,
+  },
+  // The evening look: midnight navy, candlelight, gold.
+  gold: {
+    background: candlelightBackground,
+    accent: colors.gold,
+    strong: colors.goldDeep,
+    highlight: colors.gold,
+    orbFill: 'radial-gradient(circle at 50% 40%, #1b2a55 0%, #0a1430 75%)',
+    orbBorder: colors.gold,
+    orbShadow: '0 0 2.5cqw rgba(227,187,106,0.5), 0 1.2cqw 2.5cqw rgba(0,0,0,0.5), inset 0 0 1.5cqw rgba(227,187,106,0.25)',
+    orbIcon: colors.gold,
+    ring: colors.goldGradient,
+    ringGlow: 'rgba(227,187,106,0.4)',
+    themeText: colors.gold,
+    bodyText: '#e9dfc9',
+    lanyard: colors.maroon,
+    stitch: colors.gold,
+    cardBg: colors.cream,
+    cardHeader: 'linear-gradient(90deg, #1b2a55, #0a1430)',
+    cardHeaderText: colors.gold,
+    paper: colors.cream,
+    grid: 'rgba(184,138,58,0.10)',
+    ink: colors.midnight,
+    inkAccent: colors.goldDeep,
+    trace: colors.goldDeep,
+    traceGlow: colors.gold,
+    footer: colors.midnight,
+  },
+};

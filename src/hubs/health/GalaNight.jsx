@@ -1,6 +1,6 @@
 import { HeartPulse } from 'lucide-react';
 import { PosterFrame, Photo } from './shared';
-import { assets, colors, fonts, theme } from './theme';
+import { assets, colors, fonts, theme, hashtags } from './theme';
 
 // Gala Night — the dinner take on the Health Hub: midnight navy, candlelight,
 // gold. The attendee's photo is the plate, set between a fork and a knife.
@@ -26,7 +26,7 @@ const Knife = ({ style }) => (
 const Rule = () => <div style={{ flex: 1, height: '0.2cqw', background: colors.goldDeep, opacity: 0.8 }} />;
 
 // Plate geometry (cqw)
-const PLATE = { cx: 50, cy: 47, d: 44 };
+const PLATE = { cx: 50, cy: 45.5, d: 43 };
 
 const GalaNight = ({ attendeeData, eventData }) => (
   <PosterFrame
@@ -73,13 +73,13 @@ const GalaNight = ({ attendeeData, eventData }) => (
     </div>
 
     {/* Name */}
-    <div className="absolute inset-x-0 text-center" style={{ top: '71.5cqw', padding: '0 8cqw' }}>
+    <div className="absolute inset-x-0 text-center" style={{ top: '67.5cqw', padding: '0 8cqw' }}>
       <p style={{ color: '#fff', fontFamily: fonts.serif, fontSize: '5.2cqw', fontWeight: 700, lineHeight: 1.1, overflowWrap: 'anywhere' }}>{attendeeData.name}</p>
       <p style={{ color: colors.gold, fontSize: '2.7cqw', fontWeight: 500, marginTop: '0.6cqw' }}>{attendeeData.title}</p>
     </div>
 
     {/* Details */}
-    <div className="absolute" style={{ left: '8cqw', right: '8cqw', bottom: '4.5cqw' }}>
+    <div className="absolute" style={{ left: '8cqw', right: '8cqw', bottom: '3cqw' }}>
       <div className="flex items-center" style={{ gap: '2cqw' }}>
         <Rule />
         <HeartPulse color={colors.gold} strokeWidth={1.8} style={{ width: '3.4cqw', height: '3.4cqw' }} />
@@ -90,6 +90,9 @@ const GalaNight = ({ attendeeData, eventData }) => (
       </p>
       <p className="text-center" style={{ color: colors.gold, fontFamily: fonts.serif, fontStyle: 'italic', fontSize: '3cqw', marginTop: '0.6cqw' }}>
         {theme.title}
+      </p>
+      <p className="text-center" style={{ color: 'rgba(243,234,216,0.7)', fontSize: '2.3cqw', fontWeight: 500, letterSpacing: '0.04em', marginTop: '0.4cqw' }}>
+        {hashtags}
       </p>
     </div>
   </PosterFrame>
