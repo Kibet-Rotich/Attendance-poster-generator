@@ -1,6 +1,6 @@
 import { Upload, Calendar, MapPin, Clock } from 'lucide-react';
-import bg from '../assets/bg.jpg';
-import logo from '../assets/logo.png';
+import bg from '../../../assets/bg.jpg';
+import logo from '../../../assets/logo.png';
 
 const Design1 = ({ attendeeData }) => {
   return (

@@ -1,11 +1,11 @@
-// App.jsx — Added dynamic scaling for mobile preview
-
 import React, { useState, useEffect } from 'react';
 import { Upload, Download } from 'lucide-react';
-import Design1 from './components/Design1';
-import Design2 from './components/Design2';
-import Design3 from './components/Design3';
-import Design4 from './components/Design4';
+import { HUBS } from './hubs';
+// 2025 designs are kept in src/components/archive/2025 for reference.
+
+// The hub comes from the URL hash (#tech, #health, #entrepreneurs) so each hub
+// can share a direct link to its own page.
+const hubFromHash = () => HUBS.find(({ id }) => `#${id}` === window.location.hash) ?? HUBS[0];
 
 export default function AttendingPosterGenerator() {
   const [attendeeData, setAttendeeData] = useState({
@@ -14,14 +14,32 @@ export default function AttendingPosterGenerator() {
     photo: null
   });
 
-  const [eventData] = useState({
-    date: '29th Nov 2025',
-    venue: 'BRITAM TOWERS, UpperHill',
-    time: '5:00 PM - 9:00 PM'
-  });
-
-  const [selectedDesign, setSelectedDesign] = useState(1);
+  const [hub, setHub] = useState(hubFromHash);
+  const [selectedDesign, setSelectedDesign] = useState(0);
   const [mobileScale, setMobileScale] = useState(1);
+  const selected = hub.designs[selectedDesign] ?? hub.designs[0];
+  const SelectedPoster = selected.Component;
+  const { eventData } = hub;
+
+  const selectHub = (next) => {
+    setHub(next);
+    setSelectedDesign(0);
+    window.history.replaceState(null, '', `#${next.id}`);
+  };
+
+  // Follow the hash if someone edits the URL or uses back/forward.
+  useEffect(() => {
+    const onHashChange = () => {
+      setHub(hubFromHash());
+      setSelectedDesign(0);
+    };
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, []);
+
+  useEffect(() => {
+    document.title = `I Will Be Attending · ${hub.name}`;
+  }, [hub]);
 
   // Calculate scale factor based on screen width
   useEffect(() => {
@@ -130,7 +148,8 @@ export default function AttendingPosterGenerator() {
       const dataUrl = await htmlToImage.toPng(posterElement, {
         cacheBust: true,
         pixelRatio: 3,
-        backgroundColor: 'white',
+        // Use the poster's own background; forcing a colour here overrides solid backgrounds.
+        backgroundColor: window.getComputedStyle(posterElement).backgroundColor,
         style: {
           transform: 'none',
           opacity: 1,
@@ -159,7 +178,7 @@ export default function AttendingPosterGenerator() {
       });
 
       const link = document.createElement('a');
-      link.download = `attending-poster-${attendeeData.name.replace(/\s+/g, '-').toLowerCase()}-design${selectedDesign}.png`;
+      link.download = `attending-poster-${hub.id}-${attendeeData.name.replace(/\s+/g, '-').toLowerCase()}-${selected.name.replace(/\s+/g, '-').toLowerCase()}.png`;
       link.href = dataUrl;
       document.body.appendChild(link);
       link.click();
@@ -172,11 +191,28 @@ export default function AttendingPosterGenerator() {
   };
 
   return (
-    <div className="min-h-screen p-3 sm:p-4" style={{background: 'linear-gradient(to bottom right, #1f2937, #9B2A26, #1f2937)'}}>
+    <div className="min-h-screen p-3 sm:p-4" style={{background: `linear-gradient(to bottom right, #1f2937, ${hub.accent}, #1f2937)`}}>
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-4 sm:mb-6">
           <h1 className="text-2xl sm:text-3xl font-bold text-white mb-1 sm:mb-2">I Will Be Attending</h1>
-          <p className="text-base sm:text-lg text-orange-300">Poster Generator</p>
+          <p className="text-base sm:text-lg text-orange-300">{hub.name} · {hub.event}</p>
+        </div>
+
+        {/* Hub tabs */}
+        <div className="flex justify-center mb-4 sm:mb-6">
+          <div className="inline-flex flex-wrap justify-center gap-1 p-1 rounded-xl bg-black/25 border border-white/10">
+            {HUBS.map((h) => (
+              <button
+                key={h.id}
+                onClick={() => selectHub(h)}
+                className={`px-3 sm:px-5 py-2 rounded-lg text-xs sm:text-sm font-bold transition ${
+                  h.id === hub.id ? 'bg-white text-gray-900 shadow-lg' : 'text-white/80 hover:text-white hover:bg-white/10'
+                }`}
+              >
+                {h.tab}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-4 sm:gap-8 items-start">
@@ -222,55 +258,22 @@ export default function AttendingPosterGenerator() {
 
               <div>
                 <label className="block text-white text-sm sm:text-base mb-1.5 sm:mb-2 font-semibold">Select Design Style</label>
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
-                  <button
-                    onClick={() => setSelectedDesign(1)}
-                    className={`p-2.5 sm:p-4 rounded-lg font-bold text-xs sm:text-base transition transform hover:scale-105 ${
-                      selectedDesign === 1
-                        ? 'text-white shadow-2xl'
-                        : 'bg-white/10 text-white border-2 border-white/20 hover:border-orange-500'
-                    }`}
-                    style={selectedDesign === 1 ? {background: 'linear-gradient(to bottom right, #f97316, #9B2A26)'} : {}}
-                  >
-                    Design 1<br/>
-                    <span className="text-[10px] sm:text-sm font-normal">Binary Pattern</span>
-                  </button>
-                  <button
-                    onClick={() => setSelectedDesign(2)}
-                    className={`p-2.5 sm:p-4 rounded-lg font-bold text-xs sm:text-base transition transform hover:scale-105 ${
-                      selectedDesign === 2
-                        ? 'text-white shadow-2xl'
-                        : 'bg-white/10 text-white border-2 border-white/20 hover:border-orange-500'
-                    }`}
-                    style={selectedDesign === 2 ? {background: 'linear-gradient(to bottom right, #f97316, #9B2A26)'} : {}}
-                  >
-                    Design 2<br/>
-                    <span className="text-[10px] sm:text-sm font-normal">Professional</span>
-                  </button>
-                  <button
-                    onClick={() => setSelectedDesign(3)}
-                    className={`p-2.5 sm:p-4 rounded-lg font-bold text-xs sm:text-base transition transform hover:scale-105 ${
-                      selectedDesign === 3
-                        ? 'text-white shadow-2xl'
-                        : 'bg-white/10 text-white border-2 border-white/20 hover:border-orange-500'
-                    }`}
-                    style={selectedDesign === 3 ? {background: 'linear-gradient(to bottom right, #f97316, #9B2A26)'} : {}}
-                  >
-                    Design 3<br/>
-                    <span className="text-[10px] sm:text-sm font-normal">Elegant</span>
-                  </button>
-                  <button
-                    onClick={() => setSelectedDesign(4)}
-                    className={`p-2.5 sm:p-4 rounded-lg font-bold text-xs sm:text-base transition transform hover:scale-105 ${
-                      selectedDesign === 4
-                        ? 'text-white shadow-2xl'
-                        : 'bg-white/10 text-white border-2 border-white/20 hover:border-orange-500'
-                    }`}
-                    style={selectedDesign === 4 ? {background: 'linear-gradient(to bottom right, #f97316, #9B2A26)'} : {}}
-                  >
-                    Design 4<br/>
-                    <span className="text-[10px] sm:text-sm font-normal">Invitation</span>
-                  </button>
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
+                  {hub.designs.map(({ name, label }, id) => (
+                    <button
+                      key={name}
+                      onClick={() => setSelectedDesign(id)}
+                      className={`p-2.5 sm:p-4 rounded-lg font-bold text-xs sm:text-base transition transform hover:scale-105 ${
+                        selectedDesign === id
+                          ? 'text-white shadow-2xl'
+                          : 'bg-white/10 text-white border-2 border-white/20 hover:border-orange-500'
+                      }`}
+                      style={selectedDesign === id ? {background: 'linear-gradient(to bottom right, #f97316, #9B2A26)'} : {}}
+                    >
+                      {name}<br/>
+                      <span className="text-[10px] sm:text-sm font-normal">{label}</span>
+                    </button>
+                  ))}
                 </div>
               </div>
 
@@ -301,10 +304,7 @@ export default function AttendingPosterGenerator() {
                 overflow: 'hidden'
               }}
             >
-              {selectedDesign === 1 && <Design1 attendeeData={attendeeData} eventData={eventData} />}
-              {selectedDesign === 2 && <Design2 attendeeData={attendeeData} eventData={eventData} />}
-              {selectedDesign === 3 && <Design3 attendeeData={attendeeData} eventData={eventData} />}
-              {selectedDesign === 4 && <Design4 attendeeData={attendeeData} eventData={eventData} />}
+              <SelectedPoster attendeeData={attendeeData} eventData={eventData} />
             </div>
 
             <div className="mt-4 sm:mt-6 bg-orange-500/10 border border-orange-500/30 rounded-lg sm:rounded-xl p-3 sm:p-4">

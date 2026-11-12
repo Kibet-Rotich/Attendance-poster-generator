@@ -1,7 +1,7 @@
 import { Calendar, MapPin, Clock, Phone } from 'lucide-react';
-import bg from '../assets/bg.jpg';
-import logo from '../assets/logo.png';
-import payment from '../assets/payment.jpg';
+import bg from '../../../assets/bg.jpg';
+import logo from '../../../assets/logo.png';
+import payment from '../../../assets/payment.jpg';
 
 const Design4 = ({ attendeeData, eventData }) => {
   return (

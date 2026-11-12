@@ -1,8 +1,8 @@
 // components/Design2.jsx — Slightly Reduced Text & Spacing (All Elements)
 
 import { Upload, Calendar, Clock, MapPin } from 'lucide-react';
-import bg from '../assets/bg.jpg';
-import logo from '../assets/logo.png';
+import bg from '../../../assets/bg.jpg';
+import logo from '../../../assets/logo.png';
 
 const Design2 = ({ attendeeData, eventData }) => {
   return (

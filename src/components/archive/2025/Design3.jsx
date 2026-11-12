@@ -1,8 +1,8 @@
 // components/Design3.jsx — Slightly Reduced Text Sizes (All Elements)
 
 import { Upload, Calendar, MapPin, Clock } from 'lucide-react';
-import bg from '../assets/bg.jpg';
-import logo from '../assets/logo.png';
+import bg from '../../../assets/bg.jpg';
+import logo from '../../../assets/logo.png';
 
 const Design3 = ({ attendeeData, eventData }) => {
   return (
