@@ -1,3 +1,5 @@
+import GalaNight from './GalaNight';
+import MenuCard from './MenuCard';
 import Connected from './Connected';
 import IdBadge from './IdBadge';
 import VitalSigns from './VitalSigns';
@@ -15,6 +17,8 @@ export default {
     venue: 'Mecure by Pullmans',
   },
   designs: [
+    { name: 'Gala Night', label: 'Candlelit Dinner', Component: GalaNight },
+    { name: 'Menu Card', label: 'Dinner Menu', Component: MenuCard },
     { name: 'Connected', label: 'Event Poster', Component: Connected },
     { name: 'ID Badge', label: 'Beyond the Badge', Component: IdBadge },
     { name: 'Vital Signs', label: 'Light & Clinical', Component: VitalSigns },
