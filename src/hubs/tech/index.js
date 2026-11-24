@@ -12,7 +12,7 @@ export default {
   event: '8 Years On Dinner',
   accent: '#9B2A26',
   eventData: {
-    date: '27th Nov 2026',
+    date: '4th Dec 2026',
     venue: 'DoubleTree by Hilton',
     time: '5-9PM',
   },

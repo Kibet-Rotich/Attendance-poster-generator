@@ -19,7 +19,7 @@ const Minimal = ({ attendeeData, eventData }) => (
       {/* Top row: logo + label */}
       <div className="flex items-center justify-between">
         <img src={assets.logoWhite} alt="ELP Tech Hub" style={{ height: '7cqw', width: 'auto' }} />
-        <p style={{ color: colors.gold, fontSize: '2cqw', letterSpacing: '0.35em' }}>27 · 11 · 2026</p>
+        <p style={{ color: colors.gold, fontSize: '2cqw', letterSpacing: '0.35em' }}>04 · 12 · 2026</p>
       </div>
 
       {/* Middle: name and photo */}
