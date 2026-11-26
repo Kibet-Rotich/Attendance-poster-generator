@@ -226,7 +226,7 @@ export default function AttendingPosterGenerator() {
                   r.id === role.id ? 'bg-orange-500 text-white shadow-lg' : 'text-white/80 hover:text-white hover:bg-white/10'
                 }`}
               >
-                I&apos;m {r.tab}
+                {r.title}
               </button>
             ))}
           </div>

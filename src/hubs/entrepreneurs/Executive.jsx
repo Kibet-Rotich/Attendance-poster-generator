@@ -26,7 +26,7 @@ const Executive = ({ attendeeData, eventData, role }) => (
 
     {/* Text column */}
     <div className="absolute flex flex-col" style={{ left: '49cqw', right: '5cqw', top: '7cqw' }}>
-      <p style={{ color: colors.burgundy, fontFamily: fonts.condensed, fontSize: '3cqw', fontWeight: 700, letterSpacing: '0.3em' }}>{role.atThe.toUpperCase()}</p>
+      <p style={{ color: colors.burgundy, fontFamily: fonts.condensed, fontWeight: 700, whiteSpace: 'nowrap', ...(role.atThe.length > 18 ? { fontSize: '2.6cqw', letterSpacing: '0.14em' } : { fontSize: '3cqw', letterSpacing: '0.3em' }) }}>{role.atThe.toUpperCase()}</p>
       <p style={{ fontFamily: fonts.serif, color: colors.ink, fontSize: '7.4cqw', fontWeight: 700, lineHeight: 1.02, marginTop: '1.5cqw' }}>
         Networking Dinner
       </p>
