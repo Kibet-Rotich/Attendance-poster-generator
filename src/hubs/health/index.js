@@ -11,7 +11,7 @@ export default {
   event: 'Beyond the Badge',
   accent: '#1e4fd8',
   eventData: {
-    date: '28th November',
+    date: '5th December',
     time: 'From 5:00 PM',
     // As printed on the official poster.
     venue: 'Mecure by Pullmans',

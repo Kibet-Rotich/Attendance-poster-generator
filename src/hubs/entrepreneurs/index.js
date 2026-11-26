@@ -9,7 +9,7 @@ export default {
   event: 'Networking Dinner',
   accent: '#8a1c32',
   eventData: {
-    date: '28th November',
+    date: '5th December',
     time: 'From 5:00 PM',
     venue: 'DoubleTree by Hilton',
   },
