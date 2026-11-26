@@ -17,7 +17,7 @@ const Field = ({ label, value }) => (
   </div>
 );
 
-const Ticket = ({ attendeeData, eventData }) => (
+const Ticket = ({ attendeeData, eventData, role }) => (
   <PosterFrame
     style={{
       background: `radial-gradient(circle at 50% 30%, #6a1616 0%, ${BG} 65%)`,
@@ -26,7 +26,7 @@ const Ticket = ({ attendeeData, eventData }) => (
     <div className="relative h-full flex flex-col items-center" style={{ padding: '5cqw 6cqw' }}>
       <img src={assets.logoWhite} alt="ELP Tech Hub" style={{ height: '7.5cqw', width: 'auto' }} />
       <p style={{ fontFamily: fonts.script, color: colors.gold, fontSize: '7.5cqw', lineHeight: 1, marginTop: '1cqw' }}>
-        I Will Be Attending
+        {role.title}
       </p>
       <img src={assets.dinnerTitle} alt="8 Years On Dinner" style={{ width: '46cqw', height: 'auto', marginTop: '0.5cqw' }} />
 
@@ -60,13 +60,13 @@ const Ticket = ({ attendeeData, eventData }) => (
             style={{ width: '22cqw', height: '22cqw', borderRadius: '50%', border: `0.6cqw solid ${colors.maroon}` }}
           />
           <p style={{ color: colors.maroon, fontWeight: 700, fontSize: '2.2cqw', letterSpacing: '0.25em', marginTop: '2cqw' }}>
-            ADMIT ONE
+            {role.pass.toUpperCase()}
           </p>
         </div>
 
         {/* Main ticket body */}
         <div className="flex-1 min-w-0 flex flex-col justify-center" style={{ padding: '3cqw 4cqw 3cqw 4.5cqw' }}>
-          <p style={{ color: colors.goldDeep, fontSize: '1.8cqw', fontWeight: 600, letterSpacing: '0.2em' }}>GUEST</p>
+          <p style={{ color: colors.goldDeep, fontSize: '1.8cqw', fontWeight: 600, letterSpacing: '0.2em' }}>{role.guest.toUpperCase()}</p>
           <p style={{ fontFamily: fonts.serif, color: colors.ink, fontWeight: 700, fontSize: '5cqw', lineHeight: 1.1, overflowWrap: 'anywhere' }}>
             {attendeeData.name}
           </p>

@@ -20,7 +20,7 @@ const footerItem = (label, value, labelColor) => (
   </div>
 );
 
-const VitalSigns = ({ attendeeData, eventData, palette = 'blue' }) => {
+const VitalSigns = ({ attendeeData, eventData, role, palette = 'blue' }) => {
   const p = palettes[palette];
   return (
   <PosterFrame
@@ -45,7 +45,7 @@ const VitalSigns = ({ attendeeData, eventData, palette = 'blue' }) => {
     {/* Headline */}
     <div className="absolute" style={{ left: '6cqw', top: '24cqw', width: '50cqw' }}>
       <p style={{ color: p.ink, fontFamily: fonts.condensed, fontSize: '8.4cqw', fontWeight: 800, lineHeight: 0.95 }}>I WILL BE</p>
-      <p style={{ color: p.inkAccent, fontFamily: fonts.condensed, fontSize: '8.4cqw', fontWeight: 800, lineHeight: 0.95 }}>ATTENDING</p>
+      <p style={{ color: p.inkAccent, fontFamily: fonts.condensed, fontSize: '8.4cqw', fontWeight: 800, lineHeight: 0.95 }}>{role.word.toUpperCase()}</p>
     </div>
 
     {/* Heartbeat line */}

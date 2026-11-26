@@ -19,7 +19,7 @@ const Line = ({ icon, children }) => (
 const CARD = { left: 7, top: 19, width: 42, height: 77 };
 const clipX = CARD.left + CARD.width / 2;
 
-const IdBadge = ({ attendeeData, eventData, palette = 'blue' }) => {
+const IdBadge = ({ attendeeData, eventData, role, palette = 'blue' }) => {
   const p = palettes[palette];
   return (
   <PosterFrame style={p.background}>
@@ -65,7 +65,7 @@ const IdBadge = ({ attendeeData, eventData, palette = 'blue' }) => {
       <p className="text-center" style={{ color: '#55627a', fontSize: '2.4cqw', marginTop: '0.6cqw', padding: '0 3cqw' }}>{attendeeData.title}</p>
 
       <div style={{ marginTop: '2cqw', background: colors.maroon, color: '#fff', fontFamily: fonts.condensed, fontSize: '2.6cqw', fontWeight: 700, letterSpacing: '0.25em', padding: '0.6cqw 3cqw', borderRadius: '5cqw' }}>
-        ATTENDEE
+        {role.badge.toUpperCase()}
       </div>
 
       {/* Barcode */}
@@ -82,7 +82,7 @@ const IdBadge = ({ attendeeData, eventData, palette = 'blue' }) => {
 
     {/* Theme and details */}
     <div className="absolute" style={{ left: '55cqw', right: '4cqw', top: '9cqw' }}>
-      <p style={{ color: p.accent, fontFamily: fonts.condensed, fontSize: '3cqw', fontWeight: 700, letterSpacing: '0.25em' }}>I WILL BE AT</p>
+      <p style={{ color: p.accent, fontFamily: fonts.condensed, fontSize: '3cqw', fontWeight: 700, letterSpacing: '0.25em' }}>{role.at.toUpperCase()}</p>
       <p style={{ color: '#fff', fontFamily: fonts.condensed, fontSize: '9cqw', fontWeight: 800, lineHeight: 0.92, marginTop: '1.5cqw' }}>BEYOND</p>
       <p style={{ color: '#fff', fontFamily: fonts.condensed, fontSize: '9cqw', fontWeight: 800, lineHeight: 0.92 }}>THE BADGE</p>
       <p style={{ color: p.bodyText, fontSize: '2.5cqw', lineHeight: 1.4, marginTop: '2cqw' }}>{theme.subtitle}</p>

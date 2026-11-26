@@ -6,13 +6,13 @@ import { assets, colors, fonts } from './theme';
 
 const big = { fontFamily: fonts.condensed, fontWeight: 800, fontSize: '17cqw', lineHeight: 0.86, letterSpacing: '-0.01em' };
 
-const Bold = ({ attendeeData, eventData }) => (
+const Bold = ({ attendeeData, eventData, role }) => (
   <PosterFrame style={{ background: `radial-gradient(circle at 80% 20%, #6e1528 0%, ${colors.burgundyDeep} 60%)` }}>
     {/* Headline */}
     <div className="absolute" style={{ left: '6cqw', top: '7cqw' }}>
-      <p style={{ ...big, color: colors.cream }}>I&apos;LL</p>
-      <p style={{ ...big, color: 'transparent', WebkitTextStroke: `0.45cqw ${colors.peach}` }}>BE</p>
-      <p style={{ ...big, color: colors.peach }}>THERE.</p>
+      <p style={{ ...big, color: colors.cream }}>{role.bold[0]}</p>
+      <p style={{ ...big, color: 'transparent', WebkitTextStroke: `0.45cqw ${colors.peach}` }}>{role.bold[1]}</p>
+      <p style={{ ...big, color: colors.peach }}>{role.bold[2]}</p>
       <p style={{ fontFamily: fonts.condensed, color: colors.peachSoft, fontSize: '3.2cqw', fontWeight: 600, letterSpacing: '0.16em', marginTop: '3cqw' }}>
         ELP ENTREPRENEURS HUB
       </p>

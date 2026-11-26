@@ -6,7 +6,7 @@ import { assets, colors, fonts, hashtags } from './theme';
 
 const shadow = '0 0.3cqw 1.2cqw rgba(0,0,0,0.85)';
 
-const Headliner = ({ attendeeData, eventData }) => (
+const Headliner = ({ attendeeData, eventData, role }) => (
   <PosterFrame
     style={{
       backgroundColor: colors.ink,
@@ -36,7 +36,7 @@ const Headliner = ({ attendeeData, eventData }) => (
           textShadow: '0 0.4cqw 1.2cqw rgba(0,0,0,0.7)',
         }}
       >
-        I Will Be Attending
+        {role.title}
       </p>
 
       <img src={assets.dinnerTitle} alt="8 Years On Dinner" style={{ width: '55cqw', maxWidth: 'none', height: 'auto', marginLeft: '-2cqw' }} />

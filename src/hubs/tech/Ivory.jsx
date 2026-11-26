@@ -8,7 +8,7 @@ const Corner = ({ style }) => (
   <div className="absolute" style={{ width: '6cqw', height: '6cqw', borderColor: colors.goldDeep, borderStyle: 'solid', borderWidth: 0, ...style }} />
 );
 
-const Ivory = ({ attendeeData, eventData }) => (
+const Ivory = ({ attendeeData, eventData, role }) => (
   <PosterFrame style={{ background: `radial-gradient(circle at 50% 40%, #fffaf0 0%, ${colors.cream} 55%, #f1e3c6 100%)` }}>
     {/* Double border */}
     <div className="absolute" style={{ inset: '3cqw', border: `0.5cqw solid ${colors.goldDeep}` }} />
@@ -22,7 +22,7 @@ const Ivory = ({ attendeeData, eventData }) => (
       <img src={assets.logoMaroon} alt="ELP Tech Hub" style={{ height: '8.5cqw', width: 'auto' }} />
 
       <p style={{ color: colors.goldDeep, fontSize: '2.2cqw', letterSpacing: '0.4em', fontWeight: 600, marginTop: '2.5cqw' }}>
-        I WILL BE ATTENDING
+        {role.phrase.toUpperCase()}
       </p>
 
       {/* Typographic title */}

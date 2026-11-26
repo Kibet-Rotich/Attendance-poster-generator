@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Upload, Download } from 'lucide-react';
 import { HUBS } from './hubs';
+import { ROLES } from './hubs/roles';
 // 2025 designs are kept in src/components/archive/2025 for reference.
 
-// The hub comes from the URL hash (#tech, #health, #entrepreneurs) so each hub
-// can share a direct link to its own page.
-const hubFromHash = () => HUBS.find(({ id }) => `#${id}` === window.location.hash) ?? HUBS[0];
+// Hub and role come from the URL hash (#tech, #health/speaking, …) so each hub
+// can share a direct link to its own attending or speaking page.
+const parseHash = () => {
+  const [hubId, roleId] = window.location.hash.slice(1).split('/');
+  return {
+    hub: HUBS.find(({ id }) => id === hubId) ?? HUBS[0],
+    role: ROLES.find(({ id }) => id === roleId) ?? ROLES[0],
+  };
+};
+const hashFor = (hub, role) => `#${hub.id}${role === ROLES[0] ? '' : `/${role.id}`}`;
 
 export default function AttendingPosterGenerator() {
   const [attendeeData, setAttendeeData] = useState({
@@ -14,7 +22,8 @@ export default function AttendingPosterGenerator() {
     photo: null
   });
 
-  const [hub, setHub] = useState(hubFromHash);
+  const [hub, setHub] = useState(() => parseHash().hub);
+  const [role, setRole] = useState(() => parseHash().role);
   const [selectedDesign, setSelectedDesign] = useState(0);
   const [mobileScale, setMobileScale] = useState(1);
   const selected = hub.designs[selectedDesign] ?? hub.designs[0];
@@ -24,13 +33,21 @@ export default function AttendingPosterGenerator() {
   const selectHub = (next) => {
     setHub(next);
     setSelectedDesign(0);
-    window.history.replaceState(null, '', `#${next.id}`);
+    window.history.replaceState(null, '', hashFor(next, role));
+  };
+
+  // Switching role keeps the current design so the two versions can be compared.
+  const selectRole = (next) => {
+    setRole(next);
+    window.history.replaceState(null, '', hashFor(hub, next));
   };
 
   // Follow the hash if someone edits the URL or uses back/forward.
   useEffect(() => {
     const onHashChange = () => {
-      setHub(hubFromHash());
+      const parsed = parseHash();
+      setHub(parsed.hub);
+      setRole(parsed.role);
       setSelectedDesign(0);
     };
     window.addEventListener('hashchange', onHashChange);
@@ -38,8 +55,8 @@ export default function AttendingPosterGenerator() {
   }, []);
 
   useEffect(() => {
-    document.title = `I Will Be Attending · ${hub.name}`;
-  }, [hub]);
+    document.title = `${role.title} · ${hub.name}`;
+  }, [hub, role]);
 
   // Calculate scale factor based on screen width
   useEffect(() => {
@@ -178,7 +195,7 @@ export default function AttendingPosterGenerator() {
       });
 
       const link = document.createElement('a');
-      link.download = `attending-poster-${hub.id}-${attendeeData.name.replace(/\s+/g, '-').toLowerCase()}-${`${selected.name} ${selected.props?.palette ?? ''}`.trim().replace(/\s+/g, '-').toLowerCase()}.png`;
+      link.download = `${role.id}-poster-${hub.id}-${attendeeData.name.replace(/\s+/g, '-').toLowerCase()}-${`${selected.name} ${selected.props?.palette ?? ''}`.trim().replace(/\s+/g, '-').toLowerCase()}.png`;
       link.href = dataUrl;
       document.body.appendChild(link);
       link.click();
@@ -194,8 +211,25 @@ export default function AttendingPosterGenerator() {
     <div className="min-h-screen p-3 sm:p-4" style={{background: `linear-gradient(to bottom right, #1f2937, ${hub.accent}, #1f2937)`}}>
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-4 sm:mb-6">
-          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-1 sm:mb-2">I Will Be Attending</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-1 sm:mb-2">{role.title}</h1>
           <p className="text-base sm:text-lg text-orange-300">{hub.name} · {hub.event}</p>
+        </div>
+
+        {/* Role switch: attending or speaking, for every hub and design */}
+        <div className="flex justify-center mb-2 sm:mb-3">
+          <div className="inline-flex gap-1 p-1 rounded-full bg-black/25 border border-white/10">
+            {ROLES.map((r) => (
+              <button
+                key={r.id}
+                onClick={() => selectRole(r)}
+                className={`px-4 sm:px-6 py-1.5 rounded-full text-xs sm:text-sm font-bold transition ${
+                  r.id === role.id ? 'bg-orange-500 text-white shadow-lg' : 'text-white/80 hover:text-white hover:bg-white/10'
+                }`}
+              >
+                I&apos;m {r.tab}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Hub tabs */}
@@ -304,7 +338,7 @@ export default function AttendingPosterGenerator() {
                 overflow: 'hidden'
               }}
             >
-              <SelectedPoster attendeeData={attendeeData} eventData={eventData} {...selected.props} />
+              <SelectedPoster attendeeData={attendeeData} eventData={eventData} role={role} {...selected.props} />
             </div>
 
             <div className="mt-4 sm:mt-6 bg-orange-500/10 border border-orange-500/30 rounded-lg sm:rounded-xl p-3 sm:p-4">
@@ -336,7 +370,7 @@ export default function AttendingPosterGenerator() {
                 <li>Plain or professional background works best</li>
                 <li>Face should be clearly visible</li>
                 <li>Keep title concise but descriptive</li>
-                <li>Share on social media to announce attendance!</li>
+                <li>Share on social media to {role.id === 'speaking' ? 'let people know you’re speaking!' : 'announce attendance!'}</li>
               </ul>
             </div>
           </div>

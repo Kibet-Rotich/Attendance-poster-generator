@@ -5,7 +5,7 @@ import { assets, colors, fonts, hashtags } from './theme';
 
 const shadow = '0 0.3cqw 1cqw rgba(0,0,0,0.8)';
 
-const Classic = ({ attendeeData, eventData }) => (
+const Classic = ({ attendeeData, eventData, role }) => (
   <PosterFrame
     style={{
       backgroundColor: colors.ink,
@@ -23,7 +23,7 @@ const Classic = ({ attendeeData, eventData }) => (
       <img src={assets.logoWhite} alt="ELP Tech Hub" style={{ height: '8.5cqw', width: 'auto' }} />
 
       <p style={{ fontFamily: fonts.script, fontSize: '7cqw', lineHeight: 1, marginTop: '0.8cqw', color: colors.gold, textShadow: '0 0.4cqw 1.2cqw rgba(0,0,0,0.7)' }}>
-        I Will Be Attending
+        {role.title}
       </p>
 
       <img src={assets.dinnerTitle} alt="8 Years On Dinner" style={{ width: '52cqw', height: 'auto', marginTop: '0.3cqw' }} />

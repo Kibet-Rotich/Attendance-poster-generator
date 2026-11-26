@@ -28,7 +28,7 @@ const Rule = () => <div style={{ flex: 1, height: '0.2cqw', background: colors.g
 // Plate geometry (cqw)
 const PLATE = { cx: 50, cy: 45.5, d: 43 };
 
-const GalaNight = ({ attendeeData, eventData }) => (
+const GalaNight = ({ attendeeData, eventData, role }) => (
   <PosterFrame
     style={{
       backgroundColor: colors.midnight,
@@ -43,7 +43,7 @@ const GalaNight = ({ attendeeData, eventData }) => (
         ELP HEALTH HUB · NETWORKING DINNER
       </p>
       <p style={{ color: colors.gold, fontFamily: fonts.script, fontSize: '8.5cqw', lineHeight: 1.1, marginTop: '1cqw', textShadow: '0 0.4cqw 1.5cqw rgba(0,0,0,0.6)' }}>
-        I will be attending
+        {role.phrase}
       </p>
     </div>
 

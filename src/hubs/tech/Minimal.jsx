@@ -10,7 +10,7 @@ const Detail = ({ label, value }) => (
   </div>
 );
 
-const Minimal = ({ attendeeData, eventData }) => (
+const Minimal = ({ attendeeData, eventData, role }) => (
   <PosterFrame style={{ background: colors.ink }}>
     {/* Thin inset frame */}
     <div className="absolute" style={{ inset: '3.5cqw', border: `0.25cqw solid ${colors.gold}`, opacity: 0.55 }} />
@@ -25,7 +25,7 @@ const Minimal = ({ attendeeData, eventData }) => (
       {/* Middle: name and photo */}
       <div className="flex-1 flex items-center" style={{ gap: '6cqw' }}>
         <div className="flex-1 min-w-0">
-          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '2.3cqw', letterSpacing: '0.35em' }}>I WILL BE ATTENDING</p>
+          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '2.3cqw', letterSpacing: '0.35em' }}>{role.phrase.toUpperCase()}</p>
           <p
             style={{
               fontFamily: fonts.serif,

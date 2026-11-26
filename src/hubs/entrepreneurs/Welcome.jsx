@@ -6,7 +6,7 @@ import { assets, colors, fonts, hashtags } from './theme';
 
 const shadow = '0 0.3cqw 1.2cqw rgba(0,0,0,0.7)';
 
-const Welcome = ({ attendeeData, eventData }) => (
+const Welcome = ({ attendeeData, eventData, role }) => (
   <PosterFrame
     style={{
       backgroundColor: colors.burgundyDeep,
@@ -19,7 +19,7 @@ const Welcome = ({ attendeeData, eventData }) => (
 
     {/* Headline */}
     <div className="absolute" style={{ left: '6cqw', top: '5cqw', width: '50cqw' }}>
-      <p style={{ fontFamily: fonts.script, color: colors.peachSoft, fontSize: '7cqw', lineHeight: 1, textShadow: shadow }}>I will be attending</p>
+      <p style={{ fontFamily: fonts.script, color: colors.peachSoft, fontSize: '7cqw', lineHeight: 1, textShadow: shadow }}>{role.phrase}</p>
       <p style={{ fontFamily: fonts.condensed, color: '#fff', fontSize: '3.4cqw', fontWeight: 600, letterSpacing: '0.18em', marginTop: '2cqw' }}>
         ELP ENTREPRENEURS HUB
       </p>

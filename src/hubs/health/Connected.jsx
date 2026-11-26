@@ -23,7 +23,7 @@ const orbs = [
   y: CY - R * Math.sin((deg * Math.PI) / 180),
 }));
 
-const Connected = ({ attendeeData, eventData, palette = 'blue' }) => {
+const Connected = ({ attendeeData, eventData, role, palette = 'blue' }) => {
   const p = palettes[palette];
   return (
   <PosterFrame style={p.background}>
@@ -75,7 +75,7 @@ const Connected = ({ attendeeData, eventData, palette = 'blue' }) => {
         boxShadow: '0 1cqw 3cqw rgba(0,0,0,0.5)',
       }}
     >
-      <p style={{ color: p.accent, fontFamily: fonts.condensed, fontSize: '2.8cqw', fontWeight: 700, letterSpacing: '0.3em' }}>I WILL BE ATTENDING</p>
+      <p style={{ color: p.accent, fontFamily: fonts.condensed, fontSize: '2.8cqw', fontWeight: 700, letterSpacing: '0.3em' }}>{role.phrase.toUpperCase()}</p>
       <p style={{ color: '#fff', fontFamily: fonts.condensed, fontSize: '6.2cqw', fontWeight: 800, lineHeight: 1.05, textTransform: 'uppercase', overflowWrap: 'anywhere' }}>
         {attendeeData.name}
       </p>

@@ -14,7 +14,7 @@ const Detail = ({ icon, value }) => (
   </div>
 );
 
-const Spotlight = ({ attendeeData, eventData }) => (
+const Spotlight = ({ attendeeData, eventData, role }) => (
   <PosterFrame
     style={{
       backgroundColor: colors.ink,
@@ -44,7 +44,7 @@ const Spotlight = ({ attendeeData, eventData }) => (
       <img src={assets.logoWhite} alt="ELP Tech Hub" style={{ height: '7cqw', width: 'auto', alignSelf: 'flex-start' }} />
 
       <p style={{ fontFamily: fonts.script, color: colors.gold, fontSize: '7cqw', lineHeight: 1, marginTop: '5cqw' }}>I Will Be</p>
-      <p style={{ fontFamily: fonts.script, color: colors.gold, fontSize: '7cqw', lineHeight: 1 }}>Attending</p>
+      <p style={{ fontFamily: fonts.script, color: colors.gold, fontSize: '7cqw', lineHeight: 1 }}>{role.word}</p>
 
       <img src={assets.dinnerTitle} alt="8 Years On Dinner" style={{ width: '41cqw', height: 'auto', marginTop: '1.5cqw', marginLeft: '-1cqw' }} />
 

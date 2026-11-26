@@ -14,7 +14,7 @@ const Line = ({ icon, children }) => (
   </div>
 );
 
-const Executive = ({ attendeeData, eventData }) => (
+const Executive = ({ attendeeData, eventData, role }) => (
   <PosterFrame style={{ background: colors.cream }}>
     {/* Photo panel */}
     <div className="absolute" style={{ left: 0, top: 0, bottom: 0, width: '42cqw', background: colors.burgundy }}>
@@ -26,7 +26,7 @@ const Executive = ({ attendeeData, eventData }) => (
 
     {/* Text column */}
     <div className="absolute flex flex-col" style={{ left: '49cqw', right: '5cqw', top: '7cqw' }}>
-      <p style={{ color: colors.burgundy, fontFamily: fonts.condensed, fontSize: '3cqw', fontWeight: 700, letterSpacing: '0.3em' }}>I WILL BE AT THE</p>
+      <p style={{ color: colors.burgundy, fontFamily: fonts.condensed, fontSize: '3cqw', fontWeight: 700, letterSpacing: '0.3em' }}>{role.atThe.toUpperCase()}</p>
       <p style={{ fontFamily: fonts.serif, color: colors.ink, fontSize: '7.4cqw', fontWeight: 700, lineHeight: 1.02, marginTop: '1.5cqw' }}>
         Networking Dinner
       </p>

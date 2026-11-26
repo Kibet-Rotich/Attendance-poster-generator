@@ -25,7 +25,7 @@ const Flourish = () => (
   </svg>
 );
 
-const MenuCard = ({ attendeeData, eventData }) => (
+const MenuCard = ({ attendeeData, eventData, role }) => (
   <PosterFrame
     style={{
       backgroundColor: colors.midnight,
@@ -57,7 +57,7 @@ const MenuCard = ({ attendeeData, eventData }) => (
         <Photo photo={attendeeData.photo} style={{ width: '100%', height: '100%', borderRadius: '50%' }} />
       </div>
 
-      <p style={{ color: colors.maroon, fontFamily: fonts.script, fontSize: '6.2cqw', lineHeight: 1.1, marginTop: '1.2cqw' }}>I will be attending</p>
+      <p style={{ color: colors.maroon, fontFamily: fonts.script, fontSize: '6.2cqw', lineHeight: 1.1, marginTop: '1.2cqw' }}>{role.phrase}</p>
       <p style={{ color: colors.navy, fontFamily: fonts.serif, fontSize: '4.4cqw', fontWeight: 700, lineHeight: 1.1, overflowWrap: 'anywhere' }}>{attendeeData.name}</p>
       <p style={{ color: '#6a6458', fontSize: '2.4cqw', marginTop: '0.4cqw' }}>{attendeeData.title}</p>
 
